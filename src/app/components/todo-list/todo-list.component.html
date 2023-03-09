@@ -1,0 +1,52 @@
+<h2>Todo List</h2>
+<p>
+    <button (click)="tasksRepository.markAllAsDone()">
+        Mark all as done
+    </button>
+</p>
+
+<div class="tasks">
+    <app-task *ngFor="let task of tasksRepository.tasks$ | async; trackBy: trackTasks"
+              [task]="task"
+              (done)="tasksRepository.markAsDone(task)"
+              (notDone)="tasksRepository.markAsNotDone(task)"
+              (updateContent)="tasksRepository.updateTaskContent(task, $event)"
+              (delete)="tasksRepository.removeTask(task)">
+    </app-task>
+</div>
+
+<div *ngIf="(addingTask$ | async) === false"
+     class="add-task-button-container">
+    <button mat-raised-button
+            (click)="addingTask$.next(true)">
+        <mat-icon>add</mat-icon>
+        Add task
+    </button>
+</div>
+
+<form
+    class="add-task-form"
+    [formGroup]="addTaskForm"
+    *ngIf="addingTask$ | async"
+    (ngSubmit)="tasksRepository.addTask({ content: this.addTaskForm.value.content }); addingTask$.next(false)">
+    <mat-form-field class="add-task-content-container">
+        <input type="text"
+               matInput
+               placeholder="What do you need to do?"
+               formControlName="content">
+        <mat-error appFormControlErrors controlName="content"></mat-error>
+    </mat-form-field>
+
+    <button type="submit"
+            mat-icon-button
+            matTooltip="Add task"
+            [disabled]="addTaskForm.invalid">
+        <mat-icon>add</mat-icon>
+    </button>
+
+    <button type="button"
+            mat-icon-button
+            (click)="addingTask$.next(false); addTaskForm.reset()">
+        <mat-icon>clear</mat-icon>
+    </button>
+</form>

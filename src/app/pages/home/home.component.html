@@ -1,0 +1,14 @@
+<header style="display: flex; align-items: center; justify-content: space-between">
+    <h1>Home</h1>
+    <p>
+        <button (click)="logout()">Logout</button>
+    </p>
+</header>
+
+<p>
+    Hi, {{ authService.username$ | async }}
+</p>
+
+<app-todo-list>
+
+</app-todo-list>

@@ -1,0 +1,47 @@
+<button mat-icon-button
+        matTooltip="Mark as done"
+        *ngIf="!task.done"
+        (click)="done.emit()">
+    <mat-icon>check_circle</mat-icon>
+</button>
+
+<button mat-icon-button
+        matTooltip="Mark as not done"
+        *ngIf="task.done"
+        (click)="notDone.emit()">
+    <mat-icon>undo</mat-icon>
+</button>
+
+<div class="task-content"
+     [class.editing]="editing$ | async">
+    <ng-container *ngIf="editing$ | async; else notEditing">
+        <form [formGroup]="editForm">
+            <input type="text" formControlName="content">
+        </form>
+    </ng-container>
+
+    <ng-template #notEditing>
+        {{ task.content }}
+    </ng-template>
+</div>
+
+<div class="task-actions" *ngIf="!task.done">
+    <ng-container *ngIf="editing$ | async; else notEditingActions">
+        <button mat-icon-button
+                (click)="editing$.next(false); updateContent.emit(editForm.value.content)">
+            <mat-icon>check</mat-icon>
+        </button>
+    </ng-container>
+
+    <ng-template #notEditingActions>
+        <button mat-icon-button
+                (click)="editing$.next(true); editForm.patchValue({ content: task.content })">
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button
+                (click)="delete.emit()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </ng-template>
+</div>

@@ -1,0 +1,31 @@
+:host {
+    display: block;
+
+    .tasks {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        gap: 16px;
+    }
+
+    .add-task-button-container {
+        display: flex;
+        justify-content: center;
+        margin: 16px 0;
+    }
+
+    .add-task-form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 16px;
+
+        margin-top: 24px;
+
+        background: white;
+
+        .add-task-content-container {
+            flex: 1;
+        }
+    }
+}
