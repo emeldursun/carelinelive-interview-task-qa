@@ -69,3 +69,7 @@ considered as a bonus.
 10. As a user, I should have a visual indication that a task is done
 11. As a user, I should be able to mark all tasks as done
 12. As a user, I should be able to mark a task as not done
+
+# Submission
+
+Please fork this repository and add your changes. Once you're happy with your changes, please send us a link.
