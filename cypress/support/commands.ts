@@ -11,12 +11,36 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+declare namespace Cypress {
+    interface Chainable<Subject = any> {
+      login(email:string, password:string): Chainable<void>;
+      saveLocalStorage(key:string,value:string):Chainable<void>
+      restoreLocalStorage(key:string):Chainable<void>
+    }
+  }
 //
 //
 // -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
+Cypress.Commands.add('login', (email:string, password:string) => { 
+  
+    cy.visit(Cypress.env('baseURL'))
+    cy.get('[data-testid="Email"]').type(email) 
+    cy.get('[data-testid="Password"]').type(password)
+    cy.get('[data-testid="Submit"]').click()
+  
+})
+
+Cypress.Commands.add("saveLocalStorage",(key,value)=>{
+  sessionStorage.setItem(key,value)
+
+});
+
+
+
+
+
+
+
 //
 // -- This is a dual command --
 // Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
