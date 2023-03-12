@@ -1,14 +1,17 @@
 <h1>Login</h1>
-<form [formGroup]="loginForm" (ngSubmit)="loginRequest$.next(loginForm.value)">
+
+<form [formGroup]="loginForm" (ngSubmit)="loginRequest$.next(loginForm.value)" data-testid="Login">
     <mat-card>
         <mat-card-content>
             <mat-form-field>
                 <mat-label>Email address</mat-label>
+                
                 <input type="email"
+                       data-testid="Email"
                        matInput
                        formControlName="email"
                        placeholder="Your email address">
-
+                
                 <mat-error appFormControlErrors controlName="email"></mat-error>
             </mat-form-field>
 
@@ -17,6 +20,7 @@
             <mat-form-field>
                 <mat-label>Password</mat-label>
                 <input type="password"
+                       data-testid="Password"
                        matInput
                        formControlName="password"
                        placeholder="Your password">
@@ -28,6 +32,7 @@
         <mat-card-actions>
             <div style="display: flex; gap: 16px; align-items: center">
                 <button type="submit"
+                        data-testid="Submit"
                         mat-raised-button
                         color="primary"
                         [disabled]="loggingIn$ | async">
@@ -35,6 +40,7 @@
                 </button>
 
                 <mat-spinner *ngIf="loggingIn$ | async"
+                data-testid="Spinner"
                              [diameter]="24">
                 </mat-spinner>
             </div>
@@ -43,7 +49,9 @@
             <br>
 
             <p>
-                <a [routerLink]="['/forgotten-password']">
+                <a
+                data-testid="forgotten-passwordlink"
+                [routerLink]="['/forgotten-password']">
                     Forgotten password?
                 </a>
             </p>

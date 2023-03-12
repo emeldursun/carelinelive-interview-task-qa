@@ -1,6 +1,7 @@
-<h2>Todo List</h2>
+<h2 data-testid="TodoList">Todo List </h2>
 <p>
-    <button (click)="tasksRepository.markAllAsDone()">
+    <button (click)="tasksRepository.markAllAsDone()"
+    data-testid="MarkAllAsDone">
         Mark all as done
     </button>
 </p>
@@ -16,9 +17,12 @@
 </div>
 
 <div *ngIf="(addingTask$ | async) === false"
-     class="add-task-button-container">
+     class="add-task-button-container"
+  >
+     
     <button mat-raised-button
-            (click)="addingTask$.next(true)">
+            (click)="addingTask$.next(true)"
+            data-testid="AddTaskButton">
         <mat-icon>add</mat-icon>
         Add task
     </button>
@@ -33,20 +37,24 @@
         <input type="text"
                matInput
                placeholder="What do you need to do?"
-               formControlName="content">
-        <mat-error appFormControlErrors controlName="content"></mat-error>
+               formControlName="content"
+               data-testid="AddTaskInput">
+        <mat-error appFormControlErrors controlName="content"
+                    data-testid="RequiredError"></mat-error>
     </mat-form-field>
 
     <button type="submit"
             mat-icon-button
             matTooltip="Add task"
-            [disabled]="addTaskForm.invalid">
+            [disabled]="addTaskForm.invalid"
+            data-testid="SubmitAddTask">
         <mat-icon>add</mat-icon>
     </button>
 
     <button type="button"
             mat-icon-button
-            (click)="addingTask$.next(false); addTaskForm.reset()">
+            (click)="addingTask$.next(false); addTaskForm.reset()"
+            data-testid="ClearAddTask">
         <mat-icon>clear</mat-icon>
     </button>
 </form>

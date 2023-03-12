@@ -1,11 +1,17 @@
-<header style="display: flex; align-items: center; justify-content: space-between">
+<header style="display: flex; align-items: center; justify-content: space-between"
+        data-testid="Home"
+>
     <h1>Home</h1>
+
     <p>
-        <button (click)="logout()">Logout</button>
+        <button 
+        data-testid="Logout"
+        (click)="logout()">Logout</button>
     </p>
 </header>
 
-<p>
+<p data-testid="userGreeting">
+     
     Hi, {{ authService.username$ | async }}
 </p>
 
