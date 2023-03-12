@@ -9,6 +9,6 @@ export default defineConfig({
   env: {  baseURL:'http://localhost:4200/login',
           validEmail:'test@carelinelive.com',
           validPassword:'password',
-          invalidEmail:'test@com',
+          invalidEmail:'test.com',
           resetPasswordURL:'http://localhost:4200/forgotten-password'},
 });

@@ -11,7 +11,7 @@ export class ForgottenPasswordPage{
     }
 
 public inputForgottenPasswordEmail(){
-    cy.get('[data-testid="ForgottenPasswordEmail"]').type('test@gmail.com')
+    cy.get('[data-testid="ForgottenPasswordEmail"]').type(Cypress.env('validEmail'))
 }
 public submitResetPassword(){
     cy.get('[data-testid="ResetPassword"]').click()
@@ -21,7 +21,7 @@ cy.get('[data-testid="EmailSent"]').should('be.visible')
 }
 
 public enterInvalidInputs(){
-    cy.get('[data-testid="ForgottenPasswordEmail"]').type('test.com')
+    cy.get('[data-testid="ForgottenPasswordEmail"]').type(Cypress.env('invalidEmail'))
 }
 
 public verifyResetPasswordDisabled(){

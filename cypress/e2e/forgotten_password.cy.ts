@@ -6,41 +6,39 @@ describe('/forgotpassword', () => {
     let loginPage:LoginPage;
 
 beforeEach(()=> {
-   
     forgottenPasswordPage=new ForgottenPasswordPage();
     loginPage=new LoginPage();
+    loginPage.landLoginPage();
+    loginPage.clickForgottenPassword();
 })
 
 it('As a user that\'s forgotten their password, I need to be able to submit the password reset form',()=>{
-    loginPage.landLoginPage();
-    loginPage.clickForgottenPassword();
+   
     forgottenPasswordPage.inputForgottenPasswordEmail();
     forgottenPasswordPage.submitResetPassword();
     forgottenPasswordPage.verifyEmailSentPage();
     
     })
 
-    // it('As a user, I should not be able to submit the form if the inputs are invalid',()=>{
-    //     loginPage.landLoginPage();
-    //     loginPage.clickForgottenPassword();
-    //     forgottenPasswordPage.enterInvalidInputs();
-    //     forgottenPasswordPage.verifyResetPasswordDisabled();
+it('As a user, I should not be able to submit the form if the inputs are invalid',()=>{
+       
+    forgottenPasswordPage.enterInvalidInputs();
+    forgottenPasswordPage.verifyResetPasswordDisabled();
         
-        // })
-     it('As a user, I should see an error message if I do not type anything',()=>{
-            loginPage.landLoginPage();
-            loginPage.clickForgottenPassword();
-            forgottenPasswordPage.blankForgottenPasswordEmail();
-            forgottenPasswordPage.verifyEmailRequiredErrorVisible();
+    })
+it('As a user, I should see an error message if I do not type anything',()=>{
             
-            })
-     it('As a user, I should see an error message if I do not enter a valid email address',()=>{
-        loginPage.landLoginPage();
-        loginPage.clickForgottenPassword();
-        forgottenPasswordPage.enterInvalidInputs();
-        forgottenPasswordPage.verifyNotAValidEmailErrorVisible();
+    forgottenPasswordPage.blankForgottenPasswordEmail();
+    forgottenPasswordPage.verifyEmailRequiredErrorVisible();
             
-                })
+    })
+
+it('As a user, I should see an error message if I do not enter a valid email address',()=>{
+        
+    forgottenPasswordPage.enterInvalidInputs();
+    forgottenPasswordPage.verifyNotAValidEmailErrorVisible();
+            
+     })
     
 
 

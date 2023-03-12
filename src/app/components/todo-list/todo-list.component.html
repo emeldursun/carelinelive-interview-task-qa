@@ -12,7 +12,8 @@
               (done)="tasksRepository.markAsDone(task)"
               (notDone)="tasksRepository.markAsNotDone(task)"
               (updateContent)="tasksRepository.updateTaskContent(task, $event)"
-              (delete)="tasksRepository.removeTask(task)">
+              (delete)="tasksRepository.removeTask(task)"
+              data-testid="AllTasks">
     </app-task>
 </div>
 

@@ -5,26 +5,33 @@ export class HomePage{
 public verifyHomePage(){
     cy.get('[data-testid="Home"]').should('be.visible')
 }
+
 public logOut(){
     cy.get('[data-testid="Logout"]').click()
 }
-// public verifyLogout(){
-//     cy.get('[data-testid="Home"]')
-// }
+
 public verifyHomePageUrl(){
     cy.url().should('not.contain','login')
 }
 
 public verifyUserEmailMessage(){
-    //burada emaili dynamic yap
-    cy.get('[data-testid="userGreeting"]').should('contain','test@carelinelive.com')
+    cy.get('[data-testid="userGreeting"]').should('contain',Cypress.env('validEmail'))
 }
+
 public verifyTodoList(){
     cy.get('[data-testid="TodoList"]').should('contain','Todo List')
 }
-public verifyAddTask(){
+
+public verifyAddNewTask(){
     cy.get('[data-testid="AddTaskButton"]').click()
     cy.get('[data-testid="AddTaskInput"]').should('be.visible')
+    cy.get('[data-testid="AddTaskInput"]').type('AddTaskVerification')
+    cy.get('[data-testid="SubmitAddTask"]').click()
+    cy.get('[data-testid="AllTasks"]').contains('AddTaskVerification')
+}
+public verifyEmptyTask(){
+    cy.get('[data-testid="AddTaskButton"]').click()
+    
 }
 
 public verifyCancelAddingTask(){
@@ -57,18 +64,22 @@ public verifyTaskInputRequiredError(){
 public markAllAsDone(){
     cy.get('[data-testid="MarkAllAsDone"]').click()
 }
+
 public verifyTaskAsDone(){
     cy.get('[data-testid="CheckUndo"]:first').contains('undo')
 }
+
 public verifyMarkAsNotDone(){
     cy.get('[data-testid="CheckUndo"]:first').click()
     cy.get('[data-testid="CheckCircle"]:first').contains('check_circle')
 }
+
 public editTask(){
     cy.get('[data-testid="EditIcon"]:first').click()
     cy.get('[data-testid="EditFormInputBox"]').click().clear().type("Editing Verification")
     cy.get('[data-testid="EditCheckIcon"]').click()
 }
+
 public verifyTaskEdited(){
     cy.get('[data-testid="Tasks"]:first').should('contain','Editing Verification')
 }
