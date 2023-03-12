@@ -1,0 +1,27 @@
+name: Cypress Tests
+
+on: 
+  pull_request:
+  push:
+    branches:
+      -master
+      -develop
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node-version}}
+   
+      - name: Cypress test run
+        run: 
+          npm install
+          npm start
+          npx cypress run
+        env:
+          CI: true
